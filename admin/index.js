@@ -5,7 +5,7 @@
 
 'use strict';
 
-const MyContract = require('./lib/admin-contract.js');
+const AdminContract = require('./lib/admin-contract.js');
 
-module.exports.MyContract = MyContract;
-module.exports.contracts = [ MyContract ];
+module.exports.AdminContract = AdminContract;
+module.exports.contracts = [ AdminContract ];

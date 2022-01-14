@@ -8,9 +8,14 @@
 const {Contract} = require('fabric-contract-api');
 
 //Standard class, instantiation for creation of smart contract
-class MyContract extends Contract {
+class AdminContract extends Contract {
     //methods for the smart contract go here
 
-    
+    async InitLedger(ctx) {
+        //initiate the admin ledger
+
+
+
+    }
 
 }
