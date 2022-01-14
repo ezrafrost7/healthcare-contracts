@@ -18,7 +18,7 @@ class PatientContract extends Contract {
         const data = [
             {
                 ProviderID: 'admin',
-                VisitDate: today.getDate().toString(),
+                VisitDate: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
                 Description: 'initiation of patient data',
                 Notes: 'initiation of healthcare ledger'
             }
