@@ -7,6 +7,8 @@
 
 const { Contract } = require('fabric-contract-api');
 const stringify  = require('json-stringify-deterministic');
+const shim = require('fabric-shim');
+const sortKeysRecursive = require('sort-keys-recursive');
 
 class PatientContract extends Contract {
     //patient smart contract object 
@@ -18,7 +20,7 @@ class PatientContract extends Contract {
         const data = [
             {
                 ProviderID: 'admin',
-                VisitDate: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+                VisitDate: stringify(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()),
                 Description: 'initiation of patient data',
                 Notes: 'initiation of healthcare ledger'
             }
