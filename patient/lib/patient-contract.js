@@ -13,7 +13,7 @@ const sortKeysRecursive = require('sort-keys-recursive');
 class PatientContract extends Contract {
     //patient smart contract object 
 
-    async InitPatient(context) {
+    async InitLedger(context) {
         //initiate the patient's ledger
         var today = new Date();
 

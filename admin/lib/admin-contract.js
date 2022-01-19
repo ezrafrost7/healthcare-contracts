@@ -6,6 +6,8 @@
 'use strict';
 
 const {Contract} = require('fabric-contract-api');
+const stringify  = require('json-stringify-deterministic');
+const sortKeysRecursive  = require('sort-keys-recursive');
 
 //Standard class, instantiation for creation of smart contract
 class AdminContract extends Contract {
@@ -19,3 +21,5 @@ class AdminContract extends Contract {
     }
 
 }
+
+module.exports = AdminContract
