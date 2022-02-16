@@ -1,0 +1,6 @@
+# we want to ignore folders created when creating 
+# the org and channel
+crypto-config
+
+# this file is created and holds the initial blocks for the network
+config

@@ -15,38 +15,25 @@ const {exec} = require('child_process');
 class AdminContract extends Contract {
     //methods for the smart contract go here
 
-    async InitLedger(ctx) {
+    async Init(ctx) {
         //initiate the admin ledger
 
-        await ctx.stub.putState("init", "Admin ledger initiated")
+        const asset = {
+            ID: 'init0',
+            Name: 'Ledger Initiated'
+
+        }
+
+        await ctx.stub.putState(asset.ID, Buffer.from(stringify(sortKeysRecursive(asset))))
 
     }
 
-    async CreateChannel(ctx, CHANNEL_NAME) {
+    async NewPatientChannel(ctx, name) {
         //creating a patient channel
 
-        const channelArtifacts = './channelArtifacts';
-
-        if (!fs.existsSync(channelArtifacts)) {
-            fs.mkdirSync(channelArtifacts)
+        const asset = {
+            ID: name
         }
-
-        exec(`configtxgen -profile TwoOrgsApplicationGenesis -outputBlock ./channel-artifacts/${CHANNEL_NAME}.block -channelID ${CHANNEL_NAME}`, (err,stdout,stderr) => {
-
-        if (err) {
-            console.error(err);
-            return;
-        } if (stderr) {
-            console.error(stderr);
-            return;
-        }
-
-        console.log(stdout);
-        //await ctx.stub.putState(stringify(stdout), Buffer.from(stringify(stdout)))
-        return JSON.stringify(stdout);
-
-    });
-
     }
 
 }
