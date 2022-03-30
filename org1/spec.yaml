@@ -3,13 +3,9 @@ fabric:
     - "ca1.org1.provider.com"
   peers:
     - "peer1.org1.provider.com"
-  orderers:
-    - "orderer1.provider.com"
   settings:
     ca:
       FABRIC_LOGGING_SPEC: DEBUG
     peer:
-      FABRIC_LOGGING_SPEC: DEBUG
-    orderer:
       FABRIC_LOGGING_SPEC: DEBUG
   netname: "network1"

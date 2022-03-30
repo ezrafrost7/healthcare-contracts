@@ -20,26 +20,30 @@ adminDown() {
     export PATH=${PWD}/minifab:${PATH}
     cd ./org1 && minifab down,cleanup
     cd ../admin && minifab down,cleanup
+    cd ../
 }
 
 providerUp() {
     # brings up a provider on the test network and adds them to the admin channel
     local providerName="${1}"
-    local portNum="${2}"
     export PATH=${PWD}/minifab:${PATH}
-    cd ${providerName} && minifab netup -e ${portNum} -o "${providerName}.provider.com" -i 2.2 -l node -s couchdb
+    cd ${providerName} && minifab netup -e 7200 -o "${providerName}.provider.com" -i 2.2 -l node -s couchdb
     # adding the provider to the admin channel
     cd ../admin
     cp ../${providerName}/vars/JoinRequest_${providerName}-provider-com.json ./vars/NewOrgJoinRequest.json
+    # if you run discover after the command below there are no endorser endpoints in either org
+    # this is causing problems later on because there are no endorsers
     minifab orgjoin,profilegen -c admin1
     cd ../${providerName}
     cp ../admin/vars/profiles/endpoints.yaml vars
-    # #cp ../admin/vars/admin1.genesis.block vars
-    # minifab nodeimport,join -c admin1
-    # cp -r ../contracts/admin ./vars/chaincode
-    # minifab install,approve -n admin -v 1.0 -p '"Init"' -c admin1
-    # # end in the same dir that you started
-    # cd ../
+    # copy over admin1.genesis.block
+    minifab nodeimport,join -c admin1
+    cp -r ../contracts/admin ./vars/chaincode
+    minifab install,approve -n admin -v 1.0 -p '"Init"' -c admin1
+    cd ../admin
+    minifab approve,commit
+    # end in the same dir that you started
+    cd ../
 }
 
 addProvider() {
